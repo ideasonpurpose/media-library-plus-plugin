@@ -1,0 +1,46 @@
+{
+  "name": "ideasonpurpose/wp-media-library-plus",
+  "description": "WordPress Media Library Additions from Ideas On Purpose",
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "Media Library",
+    "plugin",
+    "init",
+    "Ideas On Purpose"
+  ],
+  "authors": [
+    {
+      "name": "Ideas On Purpose",
+      "homepage": "https://www.ideasonpurpose.com"
+    },
+    {
+      "name": "Joe Maller",
+      "email": "joe@ideasonpurpose.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "IdeasOnPurpose\\WP\\": "src"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "require-dev": {
+    "ideasonpurpose/wp-test-stubs": "dev-main@dev",
+    "php-stubs/acf-pro-stubs": "dev-master",
+    "php-stubs/wordpress-stubs": "^6",
+    "phpunit/phpunit": "^10"
+  },
+  "archive": {
+    "exclude": [
+      "/.git*",
+      "/tests",
+      "CHANGELOG.md",
+      "docker-compose.yml",
+      "package*",
+      "phpunit.xml"
+    ]
+  }
+}

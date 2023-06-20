@@ -1,0 +1,59 @@
+{
+  "name": "wp-media-library-plus",
+  "version": "0.0.1",
+  "description": "WordPress Media Library Additions from Ideas On Purpose",
+  "keywords": [
+    "WordPress",
+    "Media",
+    "Library"
+  ],
+  "license": "ISC",
+  "author": "Ideas On Purpose (https://www.ideasonpurpose.com/)",
+  "contributors": [
+    "Joe Maller <joe@ideasonpurpose.com>",
+    "Codrin Pavel <zerospree@yahoo.com>"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "composer": "npm run composer:install",    "test": "docker compose run --rm test",
+    "test:watch": "docker compose run --rm test watch",
+
+    "composer:install": "docker compose run --rm composer",
+    "composer:update": "docker compose run --rm composer update"
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": "*.md",
+        "options": {
+          "embeddedLanguageFormatting": "off"
+        }
+      },
+      {
+        "files": "*.php",
+        "options": {
+          "phpVersion": "7.2",
+          "printWidth": 100,
+          "singleQuote": true,
+          "tabWidth": 4,
+          "trailingCommaPHP": true
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.19.6",
+    "auto-changelog": "^2.4.0",
+    "prettier": "^2.8.8",
+    "version-everything": "^0.9.3"
+  },
+  "auto-changelog": {
+    "package": true,
+    "backfillLimit": 7
+  },
+  "version-everything": {
+    "files": [
+      "README.md"
+    ]
+  }
+}
