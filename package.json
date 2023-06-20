@@ -15,11 +15,11 @@
   ],
   "main": "index.js",
   "scripts": {
-    "composer": "npm run composer:install",    "test": "docker compose run --rm test",
-    "test:watch": "docker compose run --rm test watch",
-
+    "composer": "npm run composer:install",
     "composer:install": "docker compose run --rm composer",
-    "composer:update": "docker compose run --rm composer update"
+    "composer:update": "docker compose run --rm composer update",
+    "test": "docker compose run --rm test",
+    "test:watch": "docker compose run --rm test watch"
   },
   "prettier": {
     "overrides": [
