@@ -1,6 +1,6 @@
 # Media Library Plus
 
-#### Version 0.0.1
+#### Version 0.0.2
 
 Our Media Library Add-ons as a standalone plugin.
 
@@ -12,7 +12,7 @@ Sort by:
 - Total file size (calculated for all image sizes)
 - Height or Width (columns hidden by default)
 
-The following columns are added ot the Media Library list view
+The following columns are added to the Media Library list view
 
 - Dimensions
 - Height

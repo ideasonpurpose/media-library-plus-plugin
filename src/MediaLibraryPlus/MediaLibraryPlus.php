@@ -134,6 +134,11 @@ class MediaLibraryPlus
         return $total;
     }
 
+    /**
+     * TODO: What is ID? an integer? slug?
+     * @param mixed $id
+     * @return mixed
+     */
     public function get_combined_filesize($id)
     {
         $src = get_attached_file($id, true);

@@ -7,7 +7,8 @@
     "Media Library",
     "plugin",
     "init",
-    "Ideas On Purpose"
+    "Ideas On Purpose",
+    "IOP"
   ],
   "authors": [
     {
@@ -33,6 +34,12 @@
     "php-stubs/wordpress-stubs": "^6",
     "phpunit/phpunit": "^10"
   },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/ideasonpurpose/wp-test-stubs"
+    }
+  ],
   "archive": {
     "exclude": [
       "/.git*",
