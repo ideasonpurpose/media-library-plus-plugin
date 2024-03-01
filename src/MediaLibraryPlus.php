@@ -1,6 +1,6 @@
 <?php
 
-namespace IdeasOnPurpose\WP\MediaLibraryPlus;
+namespace IdeasOnPurpose\WP;
 
 /**
  * This class adds controls for improving the WordPress admin Media Grid.
@@ -135,9 +135,8 @@ class MediaLibraryPlus
     }
 
     /**
-     * TODO: What is ID? an integer? slug?
-     * @param mixed $id
-     * @return mixed
+     * @param int $id
+     * @return int Total filesize in bytes
      */
     public function get_combined_filesize($id)
     {
@@ -145,7 +144,7 @@ class MediaLibraryPlus
         $total = filesize($src);
         $basedir = dirname($src);
         $metadata = wp_get_attachment_metadata($id);
-        if (array_key_exists('sizes', $metadata)) {
+        if (is_array($metadata) && array_key_exists('sizes', $metadata)) {
             foreach ($metadata['sizes'] as $size) {
                 $src = "{$basedir}/{$size['file']}";
                 $total += filesize($src);
@@ -163,7 +162,44 @@ class MediaLibraryPlus
     public function renderColumns($col, $id)
     {
         $metadata = wp_get_attachment_metadata($id);
+        error_log("Media column: {$col}");
+
+
+
+        // DEBUG SNIPPET START
+        if (class_exists('Kint')) {\Kint::$mode_default = \Kint::MODE_CLI;}
+        if (class_exists('Sage')) {\Sage::enabled(\Sage::MODE_CLI);}
+
+        error_log(@d($col, $id));
+
+        if (class_exists('Kint')) {\Kint::$mode_default = \Kint::MODE_RICH;}
+        if (class_exists('Sage')) {\Sage::enabled(\Sage::MODE_RICH);}
+        // DEBUG SNIPPET END
+
         switch ($col) {
+            // TODO: Break each of these out into individual functions for
+            //       readability and easier testing.
+
+            // TODO: Wrong place, this needs to be in renderSortableColumns
+            //       Does everything?
+
+            // case 'file':
+            //     printf(
+            //         '<a href="%s">%s</a>',
+            //         get_edit_post_link($id),
+            //         get_the_post_thumbnail($id, 'small')
+            //     );
+
+            //     printf(
+            //         '<strong class="has-media-icon"><a href="%s" aria-label="“%s” (Edit)"><span class="media-icon image-icon">%s</span>%s</a></strong>',
+            //         get_edit_post_link($id),
+            //         get_the_title($id),
+            //         get_the_post_thumbnail($id, 'small'),
+            //         get_the_title($id)
+            //     );
+
+            //     break;
+
             case 'width':
                 $val = get_post_meta($id, 'img_width', true);
                 if (!$val && $metadata) {

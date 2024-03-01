@@ -15,4 +15,4 @@ namespace IdeasOnPurpose\WP;
 
 require __DIR__ . '/vendor/autoload.php';
 
-new MediaLibraryPlus\MediaLibraryPlus();
+new MediaLibraryPlus();
