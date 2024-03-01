@@ -5,7 +5,7 @@
  * Description:       Media Library Additions from Ideas On Purpose
  * Requires at least: 6.0
  * Requires PHP:      8.0
- * Version:           0.0.2
+ * Version:           0.0.3
  * Author:            Ideas On Purpose
  * License:           ISC
  * License URI:       https://opensource.org/licenses/isc-license.txt

@@ -19,7 +19,8 @@
     "composer:install": "docker compose run --rm composer",
     "composer:update": "docker compose run --rm composer update",
     "test": "docker compose run --rm test",
-    "test:watch": "docker compose run --rm test watch"
+    "test:watch": "docker compose run --rm test watch",
+    "version": "version-everything && git add -u"
   },
   "prettier": "@ideasonpurpose/prettier-config",
   "devDependencies": {
