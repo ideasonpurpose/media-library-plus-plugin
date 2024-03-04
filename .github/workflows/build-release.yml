@@ -39,11 +39,11 @@ jobs:
       - name: npm install
         run: |
           npm ci
-          chmod -R +x node_modules/.bin
-          npm run build
 
-      # - name: Build with npm bin script
-      #   run: iop-build-zip-archive
+      - name: Build with npm bin script
+        run: |
+          chmod +x node_modules/.bin/iop-build-zip-archive
+          iop-build-zip-archive
         
       # - name: Create Zip archive with `composer archive`
       #   run: |
