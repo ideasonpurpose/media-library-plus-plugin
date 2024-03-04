@@ -18,7 +18,7 @@
   "scripts": {
     "_prebuild": "npm run composer:no-dev",
     "build:local": "node node_modules/@ideasonpurpose/build-tools-wordpress/bin/zip.js",
-    "build": "iop-build-zip-archive",
+    "build": "npx iop-build-zip-archive",
     "_postbuild": "npm run composer",
     "composer": "npm run composer:install",
     "composer:install": "docker compose run --rm composer",
