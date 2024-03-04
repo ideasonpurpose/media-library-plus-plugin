@@ -39,12 +39,14 @@ jobs:
       - name: npm install
         run: |
           npm ci
-          pwd
-          echo "$(pwd)/node_modules/.bin" >> $GITHUB_PATH
+          npx iop-build-zip-archive
+      # pwd
+      # echo "$(pwd)/node_modules/.bin" >> $GITHUB_PATH
 
-      - name: try running again
-        run: |
-          iop-build-zip-archive
+      # Worked, with the path set
+      # - name: try running again
+      #   run: |
+      #     iop-build-zip-archive
       # next, try setting path BEFORE npm ci, then running ci & build in one step
         
     
