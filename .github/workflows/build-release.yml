@@ -31,11 +31,13 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --no-dev
 
-      - name: npm install & build
+      - name: npm install
         run: |
           npm ci
-          iop-build-zip-archive
 
+      - name: Build with npm bin script
+        run: iop-build-zip-archive
+        
       # - name: Create Zip archive with `composer archive`
       #   run: |
       #     composer archive -f zip --dir=../ --file=${REPO}
