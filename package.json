@@ -8,6 +8,8 @@
     "Library"
   ],
   "license": "ISC",
+  "type": "module",
+
   "author": "Ideas On Purpose (https://www.ideasonpurpose.com/)",
   "contributors": [
     "Joe Maller <joe@ideasonpurpose.com>",
@@ -15,15 +17,20 @@
   ],
   "main": "index.js",
   "scripts": {
+    "_prebuild": "npm run composer:no-dev",
+    "build": "node node_modules/@ideasonpurpose/build-tools-wordpress/bin/zip.js",
+    "_postbuild": "npm run composer",
     "composer": "npm run composer:install",
     "composer:install": "docker compose run --rm composer",
+    "composer:no-dev": "docker compose run --rm composer install --no-dev",
     "composer:update": "docker compose run --rm composer update",
     "test": "docker compose run --rm test",
     "test:watch": "docker compose run --rm test watch",
-    "version": "version-everything && git add -u"
+    "version": "version-everything && auto-changelog && git add -u"
   },
   "prettier": "@ideasonpurpose/prettier-config",
   "devDependencies": {
+    "@ideasonpurpose/build-tools-wordpress": "^1.1.6",
     "@ideasonpurpose/prettier-config": "^0.0.4",
     "@prettier/plugin-php": "^0.22.2",
     "auto-changelog": "^2.4.0",
