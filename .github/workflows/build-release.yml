@@ -34,7 +34,7 @@ jobs:
       - name: npm install & build
         run: |
           npm ci
-          npm run build
+          iop-build-zip-archive
 
       # - name: Create Zip archive with `composer archive`
       #   run: |
