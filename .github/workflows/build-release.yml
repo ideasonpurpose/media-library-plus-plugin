@@ -39,6 +39,7 @@ jobs:
       - name: npm install
         run: |
           npm ci
+          chmod -R +x node_modules/.bin
           npm run build
 
       # - name: Build with npm bin script
