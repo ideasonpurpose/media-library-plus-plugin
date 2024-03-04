@@ -14,6 +14,10 @@ jobs:
       # https://github.com/marketplace/actions/checkout
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Set up REPO and TAG environment vars
         run: |
           echo "REPO=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
@@ -31,10 +35,11 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --no-dev
 
+
       - name: npm install
         run: |
           npm ci
-          npx iop-build-zip-archive
+          npm run build
 
       # - name: Build with npm bin script
       #   run: iop-build-zip-archive
