@@ -17,7 +17,8 @@
   "main": "index.js",
   "scripts": {
     "_prebuild": "npm run composer:no-dev",
-    "build": "node node_modules/@ideasonpurpose/build-tools-wordpress/bin/zip.js",
+    "build:local": "node node_modules/@ideasonpurpose/build-tools-wordpress/bin/zip.js",
+    "build": "iop-build-zip-archive",
     "_postbuild": "npm run composer",
     "composer": "npm run composer:install",
     "composer:install": "docker compose run --rm composer",
@@ -29,7 +30,7 @@
   },
   "prettier": "@ideasonpurpose/prettier-config",
   "devDependencies": {
-    "@ideasonpurpose/build-tools-wordpress": "^1.1.10",
+    "@ideasonpurpose/build-tools-wordpress": "^1.1.11",
     "@ideasonpurpose/prettier-config": "^0.0.4",
     "@prettier/plugin-php": "^0.22.2",
     "auto-changelog": "^2.4.0",
