@@ -9,7 +9,6 @@
   ],
   "license": "ISC",
   "type": "module",
-
   "author": "Ideas On Purpose (https://www.ideasonpurpose.com/)",
   "contributors": [
     "Joe Maller <joe@ideasonpurpose.com>",
@@ -30,7 +29,7 @@
   },
   "prettier": "@ideasonpurpose/prettier-config",
   "devDependencies": {
-    "@ideasonpurpose/build-tools-wordpress": "^1.1.6",
+    "@ideasonpurpose/build-tools-wordpress": "^1.1.8",
     "@ideasonpurpose/prettier-config": "^0.0.4",
     "@prettier/plugin-php": "^0.22.2",
     "auto-changelog": "^2.4.0",
