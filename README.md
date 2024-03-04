@@ -1,6 +1,6 @@
 # Media Library Plus
 
-#### Version 0.0.4
+#### Version 0.0.5
 
 Our Media Library Add-ons as a standalone plugin.
 
