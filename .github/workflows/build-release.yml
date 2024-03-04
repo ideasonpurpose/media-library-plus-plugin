@@ -31,8 +31,10 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --no-dev
 
-      - name: Build the plugin
-        run: npm run build
+      - name: npm install & build
+        run: |
+          npm ci
+          npm run build
 
       # - name: Create Zip archive with `composer archive`
       #   run: |
