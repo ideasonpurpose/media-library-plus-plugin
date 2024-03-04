@@ -39,7 +39,17 @@ jobs:
       - name: npm install
         run: |
           npm ci
-          node node_modules/.bin/iop-build-zip-archive
+          pwd
+          echo "$(pwd)/node_modules/.bin" >> $GITHUB_PATH
+
+      - name: try running again
+        run: |
+          iop-build-zip-archive
+      # next, try setting path BEFORE npm ci, then running ci & build in one step
+        
+    
+      # node node_modules/.bin/iop-build-zip-archive
+          
         
       # - name: Create Zip archive with `composer archive`
       #   run: |
