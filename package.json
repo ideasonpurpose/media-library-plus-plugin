@@ -29,7 +29,7 @@
   },
   "prettier": "@ideasonpurpose/prettier-config",
   "devDependencies": {
-    "@ideasonpurpose/build-tools-wordpress": "^1.1.9",
+    "@ideasonpurpose/build-tools-wordpress": "^1.1.10",
     "@ideasonpurpose/prettier-config": "^0.0.4",
     "@prettier/plugin-php": "^0.22.2",
     "auto-changelog": "^2.4.0",
