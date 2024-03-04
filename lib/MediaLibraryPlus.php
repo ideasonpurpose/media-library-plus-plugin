@@ -23,26 +23,28 @@ class MediaLibraryPlus
     public function __construct()
     {
         add_action('admin_footer', [$this, 'includeFiles']);
+        add_action('admin_enqueue_scripts', [$this, 'adminStyles'], 100);
+
+        // Column related actions & filters
         add_action('manage_upload_columns', [$this, 'addColumns']);
         add_action('manage_media_custom_column', [$this, 'renderColumns'], 10, 2);
-        add_action('admin_enqueue_scripts', [$this, 'adminStyles'], 100);
+        add_filter('manage_upload_sortable_columns', [$this, 'makeSortable']);
+        add_action('media_row_actions', [$this, 'addRowAction'], 10, 2);
+        // Hide granular columns by default
+        add_filter('default_hidden_columns', [$this, 'hide_columns_default'], 10, 2);
+
+        // column sorting
+        add_action('pre_get_posts', [$this, 'sort_by_column']);
 
         // TODO: Setting up for sortable columns, store image dimensions in post_meta
         add_filter('wp_generate_attachment_metadata', [$this, 'update_image_postmeta'], 10, 2);
         add_action('bulk_actions-upload', [$this, 'addBulkAction']);
-        add_action('media_row_actions', [$this, 'addRowAction'], 10, 2);
-        add_action('pre_get_posts', [$this, 'sort_by_column']);
-        add_filter('manage_upload_sortable_columns', [$this, 'makeSortable']);
 
-        // Action Handlers
         add_action('handle_bulk_actions-upload', [$this, 'handle_bulk_actions'], 10, 3);
         add_action("admin_post_{$this->action_slug}", [$this, 'handle_row_actions']);
 
-        # Can we add stuff tot the Media Items filter menu by hacking mime types?
+        # Can we add stuff to the Media Items filter menu by hacking mime types?
         // add_filter('post_mime_types', [$this, 'hack_mime_types']);
-
-        # Hide granular columns by default
-        add_filter('default_hidden_columns', [$this, 'hide_columns_default'], 10, 2);
     }
 
     public function includeFiles()
@@ -86,6 +88,7 @@ class MediaLibraryPlus
         foreach ($cols as $key => $value) {
             $newCols[$key] = $value;
             if ($key === 'title') {
+                $newCols['thumbnail'] = 'Thumbnail';
                 $newCols['dimensions'] = 'Dimensions';
                 $newCols['width'] = 'Width';
                 $newCols['height'] = 'Height';
@@ -100,6 +103,7 @@ class MediaLibraryPlus
     public function hide_columns_default($cols, $screen)
     {
         if ($screen->id == 'upload') {
+            $cols['title'] = 'title';
             $cols['width'] = 'width';
             $cols['height'] = 'height';
             // $cols['dimensions'] = 'dimensions';
@@ -162,19 +166,25 @@ class MediaLibraryPlus
     public function renderColumns($col, $id)
     {
         $metadata = wp_get_attachment_metadata($id);
-        error_log("Media column: {$col}");
+        // error_log("Media column: {$col}");
 
+        // // DEBUG SNIPPET START
+        // if (class_exists('Kint')) {
+        //     \Kint::$mode_default = \Kint::MODE_CLI;
+        // }
+        // if (class_exists('Sage')) {
+        //     \Sage::enabled(\Sage::MODE_CLI);
+        // }
 
+        // error_log(@d($col, $id));
 
-        // DEBUG SNIPPET START
-        if (class_exists('Kint')) {\Kint::$mode_default = \Kint::MODE_CLI;}
-        if (class_exists('Sage')) {\Sage::enabled(\Sage::MODE_CLI);}
-
-        error_log(@d($col, $id));
-
-        if (class_exists('Kint')) {\Kint::$mode_default = \Kint::MODE_RICH;}
-        if (class_exists('Sage')) {\Sage::enabled(\Sage::MODE_RICH);}
-        // DEBUG SNIPPET END
+        // if (class_exists('Kint')) {
+        //     \Kint::$mode_default = \Kint::MODE_RICH;
+        // }
+        // if (class_exists('Sage')) {
+        //     \Sage::enabled(\Sage::MODE_RICH);
+        // }
+        // // DEBUG SNIPPET END
 
         switch ($col) {
             // TODO: Break each of these out into individual functions for
@@ -183,22 +193,23 @@ class MediaLibraryPlus
             // TODO: Wrong place, this needs to be in renderSortableColumns
             //       Does everything?
 
-            // case 'file':
-            //     printf(
-            //         '<a href="%s">%s</a>',
-            //         get_edit_post_link($id),
-            //         get_the_post_thumbnail($id, 'small')
-            //     );
+            case 'thumbnail':
+                // d(get_the_post_thumbnail($id, 'small'));
+                printf(
+                    '<a href="%s">%s</a>',
+                    get_edit_post_link($id),
+                    wp_get_attachment_image($id, [160, 120], true, ['alt' => ''])
+                );
 
-            //     printf(
-            //         '<strong class="has-media-icon"><a href="%s" aria-label="“%s” (Edit)"><span class="media-icon image-icon">%s</span>%s</a></strong>',
-            //         get_edit_post_link($id),
-            //         get_the_title($id),
-            //         get_the_post_thumbnail($id, 'small'),
-            //         get_the_title($id)
-            //     );
+                printf(
+                    '<strong class="has-media-icon"><a href="%s" aria-label="“%s” (Edit)"><span class="media-icon image-icon">%s</span>%s</a></strong>',
+                    get_edit_post_link($id),
+                    get_the_title($id),
+                    wp_get_attachment_image($id, [160, 120], true, ['alt' => '']),
+                    get_the_title($id)
+                );
 
-            //     break;
+                break;
 
             case 'width':
                 $val = get_post_meta($id, 'img_width', true);
@@ -351,6 +362,9 @@ class MediaLibraryPlus
         }
     }
 
+    /**
+     * Store image meta in post_meta so it can be used for sorting
+     */
     public function update_image_postmeta($metadata, $id)
     {
         $src = get_attached_file($id, true);

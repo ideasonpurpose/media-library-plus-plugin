@@ -22,7 +22,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "IdeasOnPurpose\\WP\\": "src"
+      "IdeasOnPurpose\\WP\\": "lib"
     }
   },
   "config": {
