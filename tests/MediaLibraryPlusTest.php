@@ -3,13 +3,13 @@
 namespace IdeasOnPurpose\WP;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+
 use IdeasOnPurpose\WP\Test;
 
 Test\Stubs::init();
 
-/**
- * @covers \IdeasOnPurpose\WP\MediaLibraryPlus
- */
+#[CoversClass(\IdeasOnPurpose\WP\MediaLibraryPlus::class)]
 final class MediaLibraryPlusTest extends TestCase
 {
     public $MLP;

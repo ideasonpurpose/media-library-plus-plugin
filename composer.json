@@ -22,7 +22,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "IdeasOnPurpose\\WP\\": "lib"
+      "IdeasOnPurpose\\WP\\": "src"
     }
   },
   "config": {
@@ -32,7 +32,7 @@
     "ideasonpurpose/wp-test-stubs": "dev-main@dev",
     "php-stubs/acf-pro-stubs": "dev-master",
     "php-stubs/wordpress-stubs": "^6",
-    "phpunit/phpunit": "^10"
+    "phpunit/phpunit": "^12"
   },
   "repositories": [
     {
